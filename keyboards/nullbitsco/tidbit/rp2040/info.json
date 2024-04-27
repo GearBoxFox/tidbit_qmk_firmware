@@ -1,0 +1,12 @@
+{
+    "diode_direction": "ROW2COL",
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "ws2812": {
+        "pin": "GP21"
+    },
+    "matrix_pins": {
+        "cols": [null, null, "GP29", "GP28", "GP27", "GP26"],
+        "rows": ["GP22", "GP7", "GP6", "GP5", "GP4"]
+    }
+}

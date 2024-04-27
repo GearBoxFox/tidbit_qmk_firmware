@@ -15,9 +15,15 @@
  */
 #pragma once
 
-
 /* Used to set remote for remote KB if VUSB detect doesn't work. */
 // #define KEYBOARD_REMOTE
 
 // Workaround for freezing after MacOS sleep
 #define USB_SUSPEND_WAKEUP_DELAY 200
+
+// Setup delays
+#define TAP_CODE_DELAY 10
+#define TAPPING_TERM 200
+
+#define RGBLIGHT_LAYERS
+#define RGBLIGHT_LAYER_BLINK

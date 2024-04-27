@@ -15,8 +15,12 @@
 */
 
 #include "quantum.h"
+
+#ifdef REMOTE_KEYBOARD
 #include "common/remote_kb.h"
-#include "common/bitc_led.h"
+#endif
+
+#include "common/nb_leds.h"
 
 bool numlock_set = false;
 
@@ -78,7 +82,10 @@ void led_update_ports(led_t led_state) {
 }
 
 bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
+    #ifdef REMOTE_KEYBOARD
     process_record_remote_kb(keycode, record);
+    #endif 
+
     if (!process_record_user(keycode, record)) return false;
 
     // Get the current NLCK status & set if not set.
@@ -103,9 +110,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 bootloader_jump();  // jump to bootloader
             }
             return false;
-
-        default:
-            break;
     }
 
     return true;
@@ -113,11 +117,24 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
 void matrix_init_kb(void) {
     set_bitc_LED(LED_OFF);
+    #ifdef REMOTE_KEYBOARD
     matrix_init_remote_kb();
+    #endif
     matrix_init_user();
 }
 
 void matrix_scan_kb(void) {
+    #ifdef REMOTE_KEYBOARD
     matrix_scan_remote_kb();
+    #endif
     matrix_scan_user();
+}
+
+void keyboard_post_init_kb(void) {
+    #ifdef CONSOLE_ENABLE
+    debug_enable = true;
+    debug_matrix = true;
+    debug_keyboard = true;
+    #endif
+    keyboard_post_init_user();
 }

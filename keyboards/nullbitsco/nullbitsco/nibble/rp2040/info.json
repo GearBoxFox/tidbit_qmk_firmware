@@ -1,0 +1,12 @@
+{
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "encoder": {
+        "rotary": [
+            {"pin_a": "GP9", "pin_b": "GP8"}
+        ]
+    },
+    "ws2812": {
+        "pin": "GP7"
+    }
+}
